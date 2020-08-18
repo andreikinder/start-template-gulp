@@ -23,7 +23,7 @@ let path = {
 		html: source_folder + '/',
 		css: source_folder + '/scss/style.scss',
 		js: source_folder + '/js/',
-		sprite: source_folder + '/img/sprite/',
+		// sprite: source_folder + '/img/sprite/',
 		img: source_folder + '/img/**/*.{jpg,png,svg,gif,ico,webp}',
 	},
 	clean: "./" + project_folder + "/"
@@ -82,7 +82,7 @@ function watchFiles(params) {
 	gulp.watch([path.watch.css], css);
 	gulp.watch([path.watch.js], js);
 	gulp.watch([path.watch.img], images);
-	gulp.watch([path.watch.sprite], sprite);
+	// gulp.watch([path.watch.sprite], sprite);
 }
 
 
@@ -170,20 +170,20 @@ function images() {
 }
 
 
-function sprite() {
-	return src(source_folder + '/img/sprite/*.svg')
-		.pipe(
-			svgSprite({
-				mode: {
-					stack: {
-						sprite: "svg-sprite.svg",
-						example: true
-					}
-				}
-			})
-		)
-		.pipe(dest(project_folder + '/img/sprite/'))
-}
+// function sprite() {
+// 	return src(source_folder + '/img/sprite/*.svg')
+// 		.pipe(
+// 			svgSprite({
+// 				mode: {
+// 					stack: {
+// 						sprite: "svg-sprite.svg",
+// 						example: true
+// 					}
+// 				}
+// 			})
+// 		)
+// 		.pipe(dest(project_folder + '/img/sprite/'))
+// }
 
 
 function fonts() {
@@ -283,7 +283,8 @@ smartgrid('./src/scss/vendor/', settings);
 
 
 
-let build = gulp.series(clean, gulp.parallel(images, html, js, css, fonts, sprite), fontsStyle);
+// let build = gulp.series(clean, gulp.parallel(images, html, js, css, fonts, sprite), fontsStyle);
+let build = gulp.series(clean, gulp.parallel(images, html, js, css, fonts), fontsStyle);
 let watch = gulp.parallel(build, browserSync, watchFiles);
 
 
@@ -293,7 +294,7 @@ exports.css = css;
 exports.js = js;
 
 exports.images = images;
-exports.sprite = sprite;
+// exports.sprite = sprite;
 
 exports.fonts = fonts;
 exports.fontsStyle = fontsStyle;
